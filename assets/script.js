@@ -29,7 +29,9 @@ const answerA = document.querySelector(".answerA")
 const answerB = document.querySelector(".answerB")
 const answerC = document.querySelector(".answerC")
 const answerD = document.querySelector(".answerD")
+const correctOrWrong = document.querySelector(".correctOrWrong")
 var i=0
+var questionIndex = 0;
 //define the five questions as strings within an array of objects
 const questions = [
     {
@@ -63,8 +65,29 @@ const questions = [
 ];
 //defined timer variables
 
-var timeLeft = 100;
-    console.log(timeLeft);
+// var totalTime = 100;
+// function newQuiz() {
+//     questionIndex = 0;
+//     totalTime = 100;
+//     timeLeft.textContent = totalTime;
+//     initialInput.textContent = "";
+
+//     startDiv.style.display = "none";
+//     questionDiv.style.display = "block";
+//     timer.style.display = "block";
+//     timesUp.style.display = "none";
+
+//     var startTimer = setInterval(function() {
+//         totalTime--;
+//         timeLeft.textContent = totalTime;
+//         if(totalTime <= 0) {
+//             clearInterval(startTimer);
+//             if (questionIndex < questions.length - 1) {
+//                 gameOver();
+//             }
+//         }
+//     },1000);
+
 
 let index = 0;
 var answer = []
@@ -94,58 +117,163 @@ function startQuestion() {
 
 }
 
+
+
 function answerACompare() {
     if(questions[i].choices[0] === questions[i].answer) {
         i++  
+        correctOrWrong.textContent = "Correct!";
         startQuestion()
+    }
+        else {
+            totalTime -= 10;
+            timeLeft.textContent = totalTime;
+            correctOrWrong.textContent = "Wrong!";
+            startQuestion()
     }
 }
 
 function answerBCompare() {
     if (questions[i].choices[1] === questions[i].answer) {
         i++  
+        correctOrWrong.textContent = "Correct!";
         startQuestion()
     }
+        else {
+            totalTime -= 10;
+            timeLeft.textContent = totalTime;
+            correctOrWrong.textContent = "Wrong!";
+            startQuestion()
+    }
+        
 }
 
 function answerCCompare() {
     if(questions[i].choices[2] === questions[i].answer) {
       i++  
+      correctOrWrong.textContent = "Correct!";
       startQuestion()
     }
+        else {
+            totalTime -= 10;
+            timeLeft.textContent = totalTime;
+            correctOrWrong.textContent = "Wrong!";
+            startQuestion()
+        }
 }
 
 
 function answerDCompare() {
     if(questions[i].choices[3] === questions[i].answer) {
         i++  
+        correctOrWrong.textContent = "Correct!";
         startQuestion()
     }
+        else {
+            totalTime -= 10;
+            timeLeft.textContent = totalTime;
+            correctOrWrong.textContent = "Wrong!";
+            startQuestion()
+
+
+        }
     
 }
 
-function Initials() {
-    startingSection.style.display = "none";
-    fiveQuizQuestions.style.display = "none";
-    inputInitial.style.display = "block";
-    highScoresPage.style.display = "none";
+if (questionIndex < questions.length) {
+    startQuestion();
+} else {
+    gameOver();
 }
 
-function highScores() {
-    startingSection.style.display = "none";
-    fiveQuizQuestions.style.display = "none";
-    inputInitial.style.display = "none";
-    highScoresPage.style.display = "block";
+questionIndex++;
 
-}
-console.log(questions[0].answer)
+// // function gameOver() {
+// //     summary.style.display = "block";
+// //     questionDiv.style.display = "none";
+// //     startDiv.style.display = "none";
+// //     timer.style.display = "none";
+// //     timesUp.style.display = "block";
 
-
-
-
-
+// finalScore.textContent = correctAns;
+// }
 
 
+// function Initials() {
+//     startingSection.style.display = "none";
+//     fiveQuizQuestions.style.display = "none";
+//     inputInitial.style.display = "block";
+//     highScoresPage.style.display = "none";
+// }
+
+// function highScores() {
+//     startingSection.style.display = "none";
+//     fiveQuizQuestions.style.display = "none";
+//     inputInitial.style.display = "none";
+//     highScoresPage.style.display = "block";
+
+// }
+// console.log(questions[0].answer)
+
+// function storeHighScores(event) {
+//     event.preventDefault();
+
+//     if (initialInput.value === "") {
+//         alert("Please enter your initials!");
+//         return;
+//     } 
+
+//     startDiv.style.display = "none";
+//     timer.style.display = "none";
+//     timesUp.style.display = "none";
+//     summary.style.display = "none";
+//     highScoreSection.style.display = "block";
+
+// var savedHighScores = localStorage.getItem("high scores");
+//     var scoresArray;
+
+//     if (savedHighScores === null) {
+//         scoresArray = [];
+//     } else {
+//         scoresArray = JSON.parse(savedHighScores)
+//     }
+
+//     var userScore = {
+//         initials: initialInput.value,
+//         score: finalScore.textContent
+//     };
+
+//     console.log(userScore);
+//     scoresArray.push(userScore);
+
+// var scoresArrayString = JSON.stringify(scoresArray);
+//     window.localStorage.setItem("high scores", scoresArrayString);
+    
+//     showHighScores();
+
+// function showHighScores() {
+
+//     startDiv.style.display = "none";
+//     timer.style.display = "none";
+//     questionDiv.style.display = "none";
+//     timesUp.style.display = "none";
+//     summary.style.display = "none";
+//     highScoreSection.style.display = "block";
+
+//     var savedHighScores = localStorage.getItem("high scores");
+
+// if (savedHighScores === null) {
+//     return;
+// }
+// console.log(savedHighScores);
+
+// var storedHighScores = JSON.parse(savedHighScores);
+
+// for (; i < storedHighScores.length; i++) {
+//     var eachNewHighScore = document.createElement("p");
+//     eachNewHighScore.innerHTML = storedHighScores[i].initials + ": " + storedHighScores[i].score;
+//     listOfHighScores.appendChild(eachNewHighScore);
+// }
 
 
 
@@ -156,3 +284,10 @@ document.getElementById("select-one").addEventListener("click", answerACompare)
 document.getElementById("select-two").addEventListener("click", answerBCompare)
 document.getElementById("select-three").addEventListener("click", answerCCompare)
 document.getElementById("select-four").addEventListener("click", answerDCompare)
+
+document.getElementById("submit-initial-button").addEventListener("click", function(event){ 
+    storeHighScores(event);
+});
+document.getElementById("play-again-btn").addEventListener("click",function()
+    window.localStorage.removeItem("high scores");
+    listOfHighScores.innerHTML = "High Scores Cleared!";
