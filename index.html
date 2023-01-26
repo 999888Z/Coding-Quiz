@@ -9,17 +9,16 @@
 </head>
 <body>
     <header>
-        <h2 class="high-scores">High Scores: </h2>
         <h2 class="timer">Time:</h2>
     </header>
 
-    <section class="starting-section">
+    <section class="starting-section container">
         <h1 class="page-title">Coding Quiz</h1>
-        <p class="opening-message">Try to answer the following five questions. If you get the answer wrong, 8 seconds will be taken off of the timer. The time left after answering the questions is your score. </p>
+        <p class="opening-message">Try to answer the following five questions. If you get the answer wrong, 10 seconds will be taken off of the timer. The time left after answering the questions is your score. </p>
         <button id="start-quiz-button">Start Quiz</button>
     </section>  
 
-    <section class="five-quiz-questions">
+    <section class="five-quiz-questions container">
         <h2>Q: <span class="pregunta"></span></h2>
         <ul class="answer-choices">
             <li><button class="answerA" id="select-one"></button></li>
@@ -31,24 +30,22 @@
         <p class="correctOrWrong"></p>
     </section> 
 
-    <section class="input-initials">
+    <section class="input-initials container">
         <h2 class="your-score-text">Your final score is: <span class="final-score"></span></h2>
-        //added initials input area
+        <!-- //added initials input area -->
         <p>
             Enter initials: <input type="text" id="initials" max="3" />
        <button class="submit-initial-btn">Submit</button>
         </p>
     </section>
 
-    <section class="high-scores-page">
+    <section class="high-scores-page container">
       
         <ul class="high-scores-list">
             <li class="user1"></li>
-            <li class="user2"></li>
-            <li class="user3"></li>
         </ul>
 
-        <button class="play-again-btn">Clear Scores and Start Again</button>
+        <button class="play-again-btn">Clear Score and Start Again</button>
     </section>
 
     <script src="./assets/script.js"></script>

@@ -31,40 +31,42 @@ const answerC = document.querySelector(".answerC")
 const answerD = document.querySelector(".answerD")
 const correctOrWrong = document.querySelector(".correctOrWrong")
 const timer = document.querySelector(".timer")
+var finalScore = document.querySelector(".final-score")
 var i=0
 var questionIndex = 0;
 var totalTime = 100;
 var timerInterval;
+var user1 = document.querySelector(".user1")
 
 //define the five questions as strings within an array of objects
 const questions = [
     {
-        question: "This is the text of the first question.",
-        choices: ["a. First Choice" , "b. Second Choice" , "c. Third Choice" , "d. Fourth Choice"] ,
-        answer: "c. Third Choice"
+        question: "Which of these is not a primitive data type.",
+        choices: ["a. Integer" , "b. String" , "c. Array" , "d. Boolean"] ,
+        answer: "c. Array"
     },
     {    
 
-        question: "This is the text of the second question.",
-        choices: ["a. First Choice" , "b. Second Choice" , "c. Third Choice" , "d. Fourth Choice"] ,
-        answer: "d. Fourth Choice"
+        question: "Which of these characters is used to indicate a Class in CSS.",
+        choices: ["a. #" , "b. *" , "c. @" , "d. ."] ,
+        answer: "d. ."
     },
     {    
 
-        question: "This is the text of the third question.",
-        choices: ["a. First Choice" , "b. Second Choice" , "c. Third Choice" , "d. Fourth Choice"] ,
-        answer: "b. Second Choice"
+        question: "Which of the following characters is used to indicate an ID in CSS.",
+        choices: ["a. ." , "b. #" , "c. &" , "d. !"] ,
+        answer: "b. #"
     },
     {   
-        question: "This is the text of the fourth question.",
-        choices: ["a. First Choice" , "b. Second Choice" , "c. Third Choice" , "d. Fourth Choice"] ,
-        answer: "c. Third Choice"
+        question: "A variable is always which of the following:",
+        choices: ["a. Method" , "b. String" , "c. Property" , "d. Array"] ,
+        answer: "c. Property"
     },
     {    
 
-        question: "This is the text of the fifth question.",
-        choices: ["a. First Choice" , "b. Second Choice" , "c. Third Choice" , "d. Fourth Choice"] ,
-        answer: "a. First Choice"
+        question: "A function is always which of the following:",
+        choices: ["a. Method" , "b. String" , "c. Array" , "d. Object"] ,
+        answer: "a. Method"
     }
 ]
 
@@ -73,7 +75,9 @@ function init() {
     fiveQuizQuestions.style.display = "none";
     inputInitial.style.display = "none";
     highScoresPage.style.display = "none";
-    timer.textContent = totalTime;
+    timer.textContent = "Time Left:" + totalTime;
+    i = 0
+    totalTime = 100
 }
 
 function showQuestions() {
@@ -91,21 +95,21 @@ function showQuestions() {
     answerA.textContent = (questions[i].choices[0])
     answerB.textContent = (questions[i].choices[1])
     answerC.textContent = (questions[i].choices[2])
-    answerD.textContent = (questions[i].choices[3])
+    answerD.textContent = (questions[i].choices[3]);
 
-    handleInterval();
-}
+    }
 
 function handleInterval() {  
     timerInterval = setInterval(function() {
         totalTime--;
-        timer.textContent = totalTime;
+        timer.textContent = "Time Left:" + totalTime;
 
         if (totalTime < 0) {
             clearInterval(timerInterval);
             showInputInitial();
         }
     }, 1000)
+    showQuestions();
 }
 
 function showInputInitial() {
@@ -115,7 +119,36 @@ function showInputInitial() {
     fiveQuizQuestions.style.display = "none";
     inputInitial.style.display = "block";
     highScoresPage.style.display = "none";
+if (totalTime < 0){
+    totalTime = 0
 }
+
+    finalScore.textContent = totalTime
+}
+
+function showHighScores() {
+
+    startingSection.style.display = "none";
+    fiveQuizQuestions.style.display = "none";
+    inputInitial.style.display = "none";
+    highScoresPage.style.display = "block";
+
+    var initials = document.getElementById("initials").value
+//store data in local storage
+    window.localStorage.setItem("initials", initials)
+    window.localStorage.setItem("totalTime", totalTime)
+//retrieve items from local storage
+    var saveInitials = localStorage.getItem("initials")
+    var saveScore = localStorage.getItem("totalTime")
+
+    user1.textContent = saveInitials + " ----- " + totalTime
+
+
+
+}
+
+
+
 
 function answerACompare() {
     if(questions[i].choices[0] === questions[i].answer) {
@@ -129,6 +162,7 @@ function answerACompare() {
         totalTime -= 10
         correctOrWrong.textContent = "Wrong!";
         showQuestions();
+        
     }
 
     setTimeout(function() {
@@ -141,7 +175,7 @@ function answerBCompare() {
         i++  
         correctOrWrong.textContent = "Correct!";
         showQuestions();
-      
+        
     }
     else {
         i++  
@@ -160,7 +194,7 @@ function answerCCompare() {
       i++  
       correctOrWrong.textContent = "Correct!";
       showQuestions();
-      
+     
     }
     else {
         i++  
@@ -173,33 +207,38 @@ function answerCCompare() {
         correctOrWrong.textContent = "";
     }, 1000)
 }
+
 
 
 function answerDCompare() {
     if(questions[i].choices[3] === questions[i].answer) {
-        i++  
+        i++ 
         correctOrWrong.textContent = "Correct!";
         showQuestions();
-       
+        
     }
+       
+        
     else {
         i++  
         totalTime -= 10
         correctOrWrong.textContent = "Wrong!";
         showQuestions();
     }
-
+    
     setTimeout(function() {
         correctOrWrong.textContent = "";
-    }, 1000)
-}
+        }, 1000)
+    }
+
 
 
 init()
 
-document.getElementById("start-quiz-button").addEventListener("click", showQuestions)
+document.getElementById("start-quiz-button").addEventListener("click", handleInterval)
 document.getElementById("select-one").addEventListener("click", answerACompare)
 document.getElementById("select-two").addEventListener("click", answerBCompare)
 document.getElementById("select-three").addEventListener("click", answerCCompare)
 document.getElementById("select-four").addEventListener("click", answerDCompare)
-
+document.querySelector(".submit-initial-btn").addEventListener("click", showHighScores)
+document.querySelector(".play-again-btn").addEventListener("click", init)
