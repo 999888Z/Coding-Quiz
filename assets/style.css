@@ -1,3 +1,8 @@
+
+* {
+    background-color: rgb(208, 202, 202);
+
+}
 .container {
     margin-left: auto;
     margin-right: auto;
@@ -20,4 +25,12 @@ margin-top: 70px ;
 header {
     display: flex ;
     justify-content: space-between;
+}
+
+.btn {
+    border-radius: 5px ;
+    padding: 5px ;
+    margin-bottom: 4px;
+    background-color: rgba(25, 25, 217, 0.392);
+    font-size: 16px;
 }

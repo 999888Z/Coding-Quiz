@@ -11,41 +11,41 @@
     <header>
         <h2 class="timer">Time:</h2>
     </header>
-
+<!-- added starting page -->
     <section class="starting-section container">
         <h1 class="page-title">Coding Quiz</h1>
         <p class="opening-message">Try to answer the following five questions. If you get the answer wrong, 10 seconds will be taken off of the timer. The time left after answering the questions is your score. </p>
-        <button id="start-quiz-button">Start Quiz</button>
+        <button id="start-quiz-button" class="btn">Start Quiz</button>
     </section>  
-
+<!-- added questions -->
     <section class="five-quiz-questions container">
         <h2>Q: <span class="pregunta"></span></h2>
         <ul class="answer-choices">
-            <li><button class="answerA" id="select-one"></button></li>
-            <li><button class="answerB" id="select-two"></button></li>
-            <li><button class="answerC" id="select-three"></button></li>
-            <li><button class="answerD" id="select-four"></button></li>
+            <li><button class="answerA btn" id="select-one"></button></li>
+            <li><button class="answerB btn" id="select-two"></button></li>
+            <li><button class="answerC btn" id="select-three"></button></li>
+            <li><button class="answerD btn" id="select-four"></button></li>
         </ul>
 
         <p class="correctOrWrong"></p>
     </section> 
-
+<!-- added input initials section -->
     <section class="input-initials container">
         <h2 class="your-score-text">Your final score is: <span class="final-score"></span></h2>
         <!-- //added initials input area -->
         <p>
             Enter initials: <input type="text" id="initials" max="3" />
-       <button class="submit-initial-btn">Submit</button>
+       <button class="submit-initial-btn btn">Submit</button>
         </p>
     </section>
-
+<!-- added high scores section -->
     <section class="high-scores-page container">
       
-        <ul class="high-scores-list">
+        <ul class="high-scores-list answer-choices">
             <li class="user1"></li>
         </ul>
 
-        <button class="play-again-btn">Clear Score and Start Again</button>
+        <button class="play-again-btn btn">Clear Score and Start Again</button>
     </section>
 
     <script src="./assets/script.js"></script>
